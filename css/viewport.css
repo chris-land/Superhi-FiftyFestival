@@ -8,6 +8,7 @@ properly (as fade/scroll linked transitions on mobile can be patchy) */
     .date {
       opacity: 0;
       transition: opacity 0.5s ease;
+      transition-delay:0.5s ease;
     }
     
     .in-viewport .shape,

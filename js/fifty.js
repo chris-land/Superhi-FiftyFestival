@@ -94,3 +94,63 @@ inView('.section')
 // our section into the viewport
 inView.threshold(0.2)
 
+
+// 1.we want to select all of our sections and loop through them 
+// 2. in each section we want to grab the artists and shapes
+// 3. for both of these we want to add transition-delay effects
+// 4. we want to make sure our shapes only fade in after artists
+
+const sections = document.querySelectorAll('.section')
+
+sections.forEach((section, index)=>{
+  // here we use querySelectorAll on our 'section' to only 
+  // find element inside our section vs. our entire page
+  const artists=section.querySelectorAll('.lineup li')
+  const shapes=section.querySelectorAll('.shape')
+
+  artists.forEach((artist, index) => {
+    const delay = index * 100
+    artist.style.transitionDelay = delay + 'ms'
+  })
+
+  shapes.forEach((shape, index)=>{
+    // we are setting our delay up to only start once all of our
+    // artists have fade inm using the .lenght property
+    const delay = (artists.length + index) * 100
+    shape.style.transitionDelay = delay + 'ms'
+  })
+
+})
+
+// 1. whenever we click a .js-scroll link, we want to run a function
+// 2. we want to stop the link from jumping straight to our section (its default behaviour)
+// 3. we want to find the href attribute, and then grab that element
+// 4. then scroll to it using scrollIntoView
+
+const scrollLinks=document.querySelectorAll('.js-scroll')
+
+scrollLinks.forEach(link=>{
+
+  // addEventListener is just the same as Jquery's .on()
+  // we can listen for events on elements and then run a function
+  link.addEventListener('click',(event) => {
+    // using the event keyword  we get access to a snapshot of what
+    // happened when we clicked on our link 
+    console.log(event)
+    // this is equivalent to return false in jQuery 
+    // it will block the default browser behaviour
+    // the href attribute
+    event.preventDefault()
+
+    // here we grab the href attribute from our link
+    const href = link.getAttribute('href')
+    console.log(href)
+    // here we use a new scrollIntoView feature to scroll to
+    // our desired element in a smooth fashion 
+    document.querySelector(href).scrollIntoView({ 
+    behavior: 'smooth' 
+    })
+
+  })
+
+})
